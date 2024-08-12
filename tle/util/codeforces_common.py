@@ -224,7 +224,7 @@ def days_ago(t):
         return 'yesterday'
     return f'{math.floor(days)} days ago'
 
-async def resolve_handles(ctx, converter, handles, *, mincnt=1, maxcnt=5, default_to_all_server=False):
+async def resolve_handles(ctx, converter, handles, *, mincnt=1, maxcnt=30, default_to_all_server=False):
     """Convert an iterable of strings to CF handles. A string beginning with ! indicates Discord username,
      otherwise it is a raw CF handle to be left unchanged."""
     handles = set(handles)
@@ -332,6 +332,8 @@ class SubFilter:
         for arg in args:
             if arg == '+team':
                 self.team = True
+            elif arg == '+server':
+                rest.append(arg)  # We want this to be in the handles so resolve_handles() can resolve the handles
             elif arg == '+contest':
                 self.types.append('CONTESTANT')
             elif arg =='+outof':
