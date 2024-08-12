@@ -332,6 +332,8 @@ class SubFilter:
         for arg in args:
             if arg == '+team':
                 self.team = True
+            elif arg == '+server':
+                rest.append(arg)  # We want this to be in the handles so resolve_handles() can resolve the handles
             elif arg == '+contest':
                 self.types.append('CONTESTANT')
             elif arg =='+outof':
